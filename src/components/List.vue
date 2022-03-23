@@ -1,12 +1,12 @@
 <template>
   <ol>
-    <li v-for="(todo, index) in todoList" :key="index">
+    <li v-for="(todo, index) in tasks" :key="index">
       {{ todo }}
     </li>
   </ol>
 </template>
 <script>
 export default {
-    props: ['todoList'],
+    props: ['tasks'],
 }
 </script>
