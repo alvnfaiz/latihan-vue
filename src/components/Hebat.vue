@@ -1,10 +1,10 @@
 <template>
-    <div v-if="task">
+    <div>
         Hebat!!!
     </div>
 </template>
 <script>
-    export default{
-        props: ['task'],
-    }
+export default {
+    
+}
 </script>
