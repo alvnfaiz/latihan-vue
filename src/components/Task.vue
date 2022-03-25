@@ -1,13 +1,13 @@
 <template>
   <div class="flex justify-between">
     <div class="w-4/5">
-      <span v-if="!edit">{{ todo }}</span>
+      <span v-if="!edit">{{ task }}</span>
       <span v-if="edit">
         <input
           type="text"
-          @todoEdit="todo"
-          v-model="todo"
-          class="w-full border border-blue-300 p-2"
+          @todoEdit="task"
+          v-model="task"
+          class="w-full p-2 border border-blue-300"
         />
       </span>
     </div>

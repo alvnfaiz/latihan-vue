@@ -3,7 +3,7 @@
     <h1 class="mb-8 text-3xl text-blue-600 text-bold">Todo App</h1>
     <list :tasks="tasks"></list>
     <add-todo :tasks="tasks"></add-todo>
-    <hebat></hebat>
+    <hebat v-if="tasks.length >= 4"></hebat>
   </div>
 </template>
 
