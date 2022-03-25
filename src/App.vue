@@ -1,24 +1,28 @@
 <template>
   <div id="app" class="container mx-auto">
-    <h1 class="text-bold text-3xl text-blue-600 mb-8">Todo App</h1>
+    <h1 class="mb-8 text-3xl text-blue-600 text-bold">Todo App</h1>
+    <list :tasks="tasks"></list>
     <add-todo :tasks="tasks"></add-todo>
-    <hebat v-if="tasks.length >= 4"></hebat>
+    <hebat></hebat>
   </div>
 </template>
 
 <script>
 import AddTodo from './components/AddTodo.vue'
 import Hebat from './components/Hebat.vue'
+import List from './components/List.vue'
 
 export default {
   name: 'App',
   components: {
     AddTodo,
-    Hebat
+    Hebat,
+    List
   },
   data() {
     return {
       tasks: [],
+      task: "",
     };
   },
 }
