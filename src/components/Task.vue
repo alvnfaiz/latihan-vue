@@ -1,40 +1,44 @@
 <template>
   <div class="flex justify-between">
-    <div class="w-4/5">
-      <span v-if="!edit">{{ todo }}</span>
-      <span v-if="edit">
-        <input
-          type="text"
-          @todoEdit="todo"
-          v-model="todo"
-          class="w-full border border-blue-300 p-2"
-        />
-      </span>
+    <div class="w-10/12">
+      <span v-if="!edit">{{ id }}.  {{ task }}</span>
+      <input v-if="edit" v-model="editteks" @keyup.enter="editTask" class="w-full p-2 border border-blue-900"/>
     </div>
-    <div class="w-1/5 text-white">
-      <button @click="removeTask(index)" class="p-1 bg-red-400">Delete</button>
-      |
-      <button @click="editTask()" class="p-1 bg-blue-400">Edit</button>
+    <div class="flex justify-between w-1/12 text-white">
+      <button @click="editTask" class="p-2 bg-blue-400">Edit</button>
+      <button @click="deleteTask" class="p-2 bg-red-400">Delete</button>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ['todo', 'index'],
+  name: 'Task',
+  props: {
+    task: String,
+    tasks: Array,
+    id: Number,
+  },
   data() {
     return {
-      task: "",
-      todoEdit:"",
       edit: false,
+      editteks: this.task,
+      tempTasks: [],
     };
   },
   methods: {
     editTask() {
       this.edit = !this.edit;
+      if(this.edit) {
+        this.editteks = this.task;
+      }else{
+        this.$emit('editTask', this.editteks, this.task.id);
+        this.task = this.editteks;
+        this.editteks = '';
+      }
     },
-    removeTask(index){
-        this.$emit('remove', index);
+    deleteTask() {
+      this.$emit('delete', this.task);
     },
   },
-};
+}
 </script>
