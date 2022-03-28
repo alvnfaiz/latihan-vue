@@ -1,17 +1,27 @@
 <template>
   <div class="home">
-    <list-berita></list-berita>
+    <div id="nav">
+      <h1>Berita Terkini </h1>
+      <div class="news">
+        <list-berita v-for="(berita, index) in listBerita" :berita="berita" :key="index"></list-berita>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ListBerita from '@/components/ListBerita.vue'
-
+import ListBerita from '@/components/ListBerita.vue';
 export default {
-  name: 'ListBerita',
-  components: {
-    ListBerita
-  }
-}
+  components: { ListBerita },
+  name: "App",
+  computed:{
+    listBerita(){
+      return this.$store.state.listBerita;
+    }
+  },
+  mounted(){
+    this.$store.dispatch("fetchBerita");
+  },
+};
 </script>

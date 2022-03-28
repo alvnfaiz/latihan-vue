@@ -1,29 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <h1>Berita Terkini </h1>
-      <div class="news">
-        <list-berita v-for="(berita, index) in listBerita" :berita="berita" :key="index"></list-berita>
-      </div>
-    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import ListBerita from './components/ListBerita.vue';
-export default {
-  components: { ListBerita },
-  name: "App",
-  computed:{
-    listBerita(){
-      return this.$store.state.listBerita;
-    }
-  },
-  mounted(){
-    this.$store.dispatch("fetchBerita");
-  },
-};
-</script>
 
 <style>
 #app {
