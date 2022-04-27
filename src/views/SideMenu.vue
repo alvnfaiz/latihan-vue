@@ -7,17 +7,17 @@
       <v-spacer></v-spacer>
       <search-view />
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" app clipped>
+    <v-navigation-drawer color="primary white--text" v-model="drawer" app clipped>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
-          active-class="deep-purple--text text--accent-4"
+          active-class="white--text text--accent-4"
         >
-          <v-list-item v-for="smuaCat in listCat" :key="smuaCat.name">
+          <v-list-item v-for="category in categories" :key="category.name">
             <v-list-item-icon>
-              <v-icon>{{ smuaCat.icon }}</v-icon>
+              <v-icon>{{ category.icon }}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title> {{ smuaCat.name }}</v-list-item-title>
+            <v-list-item-title> {{ category.name }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -31,16 +31,16 @@ export default {
   components: { SearchView },
   data() {
     return {
-      drawer: false,
+      drawer: true,
       group: null,
-      listCat: [
-        { name: "Business", icon: "" },
-        { name: "Entertainment", icon: "" },
-        { name: "General", icon: "" },
-        { name: "Health", icon: "" },
-        { name: "Science", icon: "" },
-        { name: "Sports", icon: "" },
-        { name: "Technology", icon: "" },
+      categories: [
+        { name: "Business", icon: "mdi-chart-line" },
+        { name: "Entertainment", icon: "mdi-movie-open" },
+        { name: "General", icon: "mdi-newspaper-variant-outline" },
+        { name: "Health", icon: "mdi-hospital" },
+        { name: "Science", icon: "mdi-beaker" },
+        { name: "Sports", icon: "mdi-football" },
+        { name: "Technology", icon: "mdi-server" },
       ],
     };
   },
