@@ -1,27 +1,47 @@
-import axios from "axios";
+import axios from "axios"
 
-const state = () => ({
-    list_berita: [],
-
-});
-
+const state = ()=>({
+    berita :[]
+})
 const mutations = {
-    setBerita(state, payload) {
-        state.list_berita = payload;
+    fetchNews(state,params){
+        state.berita = params
     },
-};
+    
+}
 
 const actions = {
-    fetchBerita(store) {
-        //fetch from news api
-        axios.get("https://newsapi.org/v2/top-headlines?country=id&apiKey=cde232c8f71b47a1b7b281be2c0eefc2").then(response => {
-            store.commit("setBerita", response.data.articles);
-        });
+    fetchNews({commit}){
+        axios.get('https://saurav.tech/NewsAPI/everything/cnn.json')
+        .then(
+            (response)=>{
+                // console.log(response.data.articles)
+                // console.log(state)
+                commit('fetchNews',response.data.articles)
+            }
+        )
     },
-};
-
+    fetchNewsMore(store){
+        axios.get('https://saurav.tech/NewsAPI/everything/cnn.json',
+        {
+            params:{
+                pageSize:5,
+                page:5
+            }
+        })
+        .then(
+            (response)=>{
+                console.log(response)
+                store.commit('fetchNews',[
+                    ...store.state.berita,
+                    ...response.data.articles
+                ]
+                )
+            }
+        )
+    }
+    
+}
 export default {
-    state,
-    mutations,
-    actions,
-};
+    state,mutations,actions
+}

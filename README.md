@@ -1,4 +1,4 @@
-# latihan-vue
+# news-project
 
 ## Project setup
 ```
