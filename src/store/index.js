@@ -1,40 +1,28 @@
-import axios from "axios";
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import actions from './actions'
+import mutations from './mutations'
+import getters from './getters'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-const persistedstate = createPersistedState({
-    key: "vuex",
-    storage: window.sessionStorage
-});
-
-export default new Vuex.Store({
-    plugins: [persistedstate],
+export function createStore () {
+  return new Vuex.Store({
     state: {
-        listBerita: [],
-        berita: [],
+      activeType: null,
+      itemsPerPage: 20,
+      items: {/* [id: number]: Item */},
+      users: {/* [id: string]: User */},
+      lists: {
+        top: [/* number */],
+        new: [],
+        show: [],
+        ask: [],
+        job: []
+      }
     },
-    mutations: {
-        setListBerita(state, payload) {
-            state.listBerita = payload;
-        },
-        setBerita(state, payload) {
-            state.berita = payload;
-        },
-    },
-    actions: {
-        fetchBerita(store) {
-            axios.get("https://newsapi.org/v2/top-headlines?country=id&apiKey=cde232c8f71b47a1b7b281be2c0eefc2").then(response => {
-                store.commit("setListBerita", response.data.articles);
-            });
-        },
-        fetchDetailBerita(store, payload) { 
-            console.log(payload);
-            store.commit("setBerita", payload);
-        },
-    },
-
-    modules: {}
-});
+    actions,
+    mutations,
+    getters
+  })
+}
