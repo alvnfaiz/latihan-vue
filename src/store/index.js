@@ -1,33 +1,36 @@
+/* eslint-disable prettier/prettier */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import createPersistedState from "vuex-persistedstate";
+import actions from './action'
+import mutations from './mutation'
+import getters from './getter'
+import createPersistedState from "vuex-persistedstate"
 
 
 
 Vue.use(Vuex);
+const persistedstate = createPersistedState({
+    key: "vuex",
+    storage: window.sessionStorage
+});
 
 export default new Vuex.Store({
+    plugins: persistedstate,
     state: {
-        berita: [],
-        kategori: [],
-    },
-    mutations: {
-        setBerita(state, payload) {
-            state.berita = payload
+        activeType: null,
+        itemsPerPage: 20,
+        items: {/* [id: number]: Item */},
+        users: {/* [id: string]: User */},
+        lists: {
+            top: [/* number */],
+            new: [],
+            show: [],
+            ask: [],
+            job: []
         }
     },
-    actions: {
-        getBerita({ commit }) {
-            axios.get('/api/berita')
-                .then(res => {
-                    commit('setBerita', res.data)
-                })
-        }
-    },
-    getters: {
-        getBerita(state) {
-            return state.berita
-        }
-    }
-})
+    actions,
+    mutations,
+    getters,
+});
