@@ -29,4 +29,3 @@ export function createAPI ({ config, version }) {
   }
   return api
 }
-© 2022 GitHub, Inc.
