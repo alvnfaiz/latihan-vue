@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
 import actions from './action'
 import mutations from './mutation'
 import getters from './getter'
